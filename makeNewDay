@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ -z $1 ]];
+then 
+    echo "No day number argument passed."
+fi
+
+dayNumber=$1
+
+mkdir ~/advent-of-code-2022/day"${dayNumber}"
+cd ~/advent-of-code-2022/day"${dayNumber}"
+touch input.txt
+touch test.txt
+cp ../template.py ./day"${dayNumber}".py

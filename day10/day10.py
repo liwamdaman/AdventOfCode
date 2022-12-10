@@ -3,7 +3,7 @@ def parseInput(filename):
         lines = f.readlines()
         return lines
 
-def process(perCycleFunc, output):
+def process(input, perCycleFunc, output):
     cycle = 1
     X = 1
     for line in input:
@@ -44,13 +44,13 @@ def render(buffer):
 def part1(input):
     print("Part 1: ")
     signalStrength = [0]
-    process(incrementSignalStrengthIfNeeded, signalStrength)
+    process(input, incrementSignalStrengthIfNeeded, signalStrength)
     print(signalStrength[0])
 
 def part2(input):
     print("\nPart 2: ")
     CrtBuffer = []
-    process(drawPixel, CrtBuffer)
+    process(input, drawPixel, CrtBuffer)
     render(CrtBuffer)
 
 input = parseInput("input.txt")

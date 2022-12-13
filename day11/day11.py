@@ -1,8 +1,10 @@
+from itertools import accumulate
+
 class Monkey:
-    def __init__(self, items, operationFunc, testFunc, trueDestination, falseDestination):
+    def __init__(self, items, operationFunc, testDivisor, trueDestination, falseDestination):
         self.items = items
         self.operationFunc = operationFunc
-        self.testFunc = testFunc
+        self.testDivisor = testDivisor
         self.trueDestination = trueDestination
         self.falseDestination = falseDestination
         self.inspectCount = 0
@@ -37,8 +39,7 @@ def parseOperation(operationLine):
             return lambda x: x * x
 
 def parseTest(testLine):
-    divisibleBy = testLine.rstrip().split("divisible by ")[1]
-    return lambda x: (x % int(divisibleBy)) == 0
+    return int(testLine.rstrip().split("divisible by ")[1])
 
 def parseTrueDest(trueDestLine):
     return int(trueDestLine.rstrip().split("monkey ")[1])
@@ -46,14 +47,19 @@ def parseTrueDest(trueDestLine):
 def parseFalseDest(falseDestLine):
     return int(falseDestLine.rstrip().split("monkey ")[1])
 
-def runMonkeys(monkeys):
-    for round in range(20):
+def runMonkeys(monkeys, numRounds, isPart2=False):
+    if isPart2:
+        modulus = list(accumulate(list(map(lambda x: x.testDivisor, monkeys)), (lambda x, y: x * y)))[-1] # was just playing with itertools here, awful code
+    for round in range(numRounds):
         for monkey in monkeys:
             for i in range(len(monkey.items)):
                 item = monkey.items.pop(0)
                 worry = monkey.operationFunc(item)
-                worry = worry // 3
-                if monkey.testFunc(worry):
+                if isPart2:
+                    worry = worry % modulus
+                else:
+                    worry = worry // 3
+                if worry % monkey.testDivisor == 0:
                     monkeys[monkey.trueDestination].items.append(worry)
                 else:
                     monkeys[monkey.falseDestination].items.append(worry)
@@ -62,12 +68,16 @@ def runMonkeys(monkeys):
 def part1(input):
     print("Part 1: ")
     monkeys = parseMonkeys(input)
-    runMonkeys(monkeys)
+    runMonkeys(monkeys, 20)
     monkeys.sort(reverse = True, key = lambda x: x.inspectCount)
     print(monkeys[0].inspectCount * monkeys[1].inspectCount)
 
 def part2(input):
     print("\nPart 2: ")
+    monkeys = parseMonkeys(input)
+    runMonkeys(monkeys, 10000, True)
+    monkeys.sort(reverse = True, key = lambda x: x.inspectCount)
+    print(monkeys[0].inspectCount * monkeys[1].inspectCount)
 
 input = parseInput("input.txt")
 

@@ -3,6 +3,7 @@
 if [[ -z $1 ]];
 then 
     echo "No day number argument passed."
+    exit 1
 fi
 
 dayNumber=$1

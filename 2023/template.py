@@ -3,7 +3,7 @@ import os
 def parseInput(filename):
     with open(filename) as f:
         lines = f.readlines()
-        return lines
+        return [line.rstrip() for line in lines]
 
 def part1(input):
     print("Part 1: ")

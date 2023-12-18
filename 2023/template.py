@@ -1,5 +1,6 @@
 import sys
 sys.path.insert(1, '/Users/willi/adventOfCode/utils')
+import utils
 
 import os
 

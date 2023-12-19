@@ -1,8 +1,7 @@
 import sys
-sys.path.insert(1, '/Users/willi/adventOfCode/utils')
-import utils
-
 import os
+sys.path.insert(1, '/Users/willi/adventOfCode/utils')
+from utils import *
 
 def parseInput(filename):
     with open(filename) as f:

@@ -1,6 +1,10 @@
 import sys
 import os
 import collections
+import copy
+import functools
+import re
+sys.setrecursionlimit(10000)
 sys.path.insert(1, '/Users/willi/adventOfCode/utils')
 from utils import *
 

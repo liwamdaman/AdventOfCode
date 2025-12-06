@@ -32,3 +32,10 @@ def getRotated90CWLines(lines):
 
 def getRotated90CWMatrix(matrix):
     return [list(x) for x in zip(*matrix[::-1])]
+
+def findNodeNeighbours(matrix, node):
+    i,j = node
+    for r in range(max(0, i-1), min(len(matrix), i+2)):
+        for c in range(max(0, j-1), min(len(matrix[0]), j+2)):
+            if (r,c) != node:
+                yield (r,c)

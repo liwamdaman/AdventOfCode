@@ -39,3 +39,16 @@ def findNodeNeighbours(matrix, node):
         for c in range(max(0, j-1), min(len(matrix[0]), j+2)):
             if (r,c) != node:
                 yield (r,c)
+
+# Generic point class
+class Point:
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+    def __repr__(self):
+        return "(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y and self.z == other.z
+    def __hash__(self):
+        return hash((self.x, self.y, self.z))

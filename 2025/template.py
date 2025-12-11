@@ -6,6 +6,7 @@ import functools
 import re
 import itertools
 import heapq
+import math
 sys.setrecursionlimit(10000)
 sys.path.insert(1, '/Users/willi/adventOfCode/utils')
 from utils import *

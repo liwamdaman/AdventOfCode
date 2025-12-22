@@ -8,7 +8,7 @@ import itertools
 import heapq
 import math
 sys.setrecursionlimit(10000)
-sys.path.insert(1, '/Users/willi/adventOfCode/utils')
+sys.path.insert(1, os.path.join(os.path.dirname(__file__), '..', '..', 'utils'))
 from utils import *
 
 def parseInput(filename):
